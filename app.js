@@ -103,3 +103,8 @@ window.startVoice = function () {
   ZBManager.startVoice();
 
 };
+window.ask = function () {
+
+  ZBManager.sendMessage();
+
+};
