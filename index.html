@@ -79,4 +79,56 @@ function ask(){
  c.innerHTML += '<div class="msg">'+a+'</div>'; i.value='';
 }
 </script>
-</<script src="app.js"></sbody></html>
+</<script src="app.js"></sbody></html>window.ask = function () {
+
+  const input =
+
+    document.getElementById("cmd") ||
+
+    document.getElementById("message");
+
+  const chat =
+
+    document.getElementById("chat") ||
+
+    document.querySelector(".chat");
+
+  if (!input || !chat) {
+
+    alert("تعذر العثور على خانة السؤال أو نافذة الإجابة");
+
+    return;
+
+  }
+
+  const text = input.value.trim();
+
+  if (!text) return;
+
+  chat.innerHTML +=
+
+    '<div class="msg you"><b>أنت:</b> ' + text + '</div>';
+
+  let answer = "تم استلام طلبك بنجاح.";
+
+  if (text.includes("وضع الشركة")) {
+
+    answer = "سأعرض لك ملخص المبيعات والمقبوض والمخزون.";
+
+  } else if (text.includes("مبيعات")) {
+
+    answer = "قسم المبيعات جاهز للتحليل.";
+
+  } else if (text.includes("مخزون")) {
+
+    answer = "قسم المخزون جاهز للتحليل.";
+
+  }
+
+  chat.innerHTML +=
+
+    '<div class="msg"><b>ZB AI:</b> ' + answer + '</div>';
+
+  chat.scrollTop = chat.scrollHeight;
+
+}
