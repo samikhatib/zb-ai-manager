@@ -67,22 +67,9 @@ footer{text-align:center;color:#7b857e;padding:25px}
 </div>
 </div>
 <footer>Prototype v1 — ZB AI Manager</footer>
-<script>
-function ask(){
- const i=document.getElementById('cmd'), c=document.getElementById('chat');
- const q=i.value.trim(); if(!q)return;
- c.innerHTML += '<div class="msg you">'+q+'</div>';
- let a='حالياً هذه نسخة تجريبية للواجهة. في النسخة التشغيلية سأربط هذا الأمر ببيانات الشركة ليعطيك نتيجة فعلية.';
- if(q.includes('وضع الشركة')||q.includes('اليوم')) a='ملخص اليوم: المبيعات $8,420، المقبوض $6,180، المستحقات $12,760. يوجد 5 تنبيهات، وأهمها شراء المرطبانات ومتابعة العملاء المتأخرين.';
- else if(q.includes('مخزون')) a='المخزون: الخيار يكفي تقريباً 6 أيام، المكدوس جيد، والمرطبانات تحتاج شراء.';
- else if(q.includes('مبيعات')) a='مبيعات اليوم التجريبية $8,420، وعدد الطلبات 27.';
- c.innerHTML += '<div class="msg">'+a+'</div>'; i.value='';
-}
-</script>
+
 <script src="app.js"></script>
 
 </body>
-
-</html>
 
 </html>
