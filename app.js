@@ -1,16 +1,4 @@
-// ZB AI Manager
-
-// شركة الأسرة التجارية ش.م.م//
-
 const ZBManager = {
-
-  company: "شركة الأسرة التجارية ش.م.م",
-
-  init() {
-
-    console.log("ZB AI Manager is ready");
-
-  },
 
   sendMessage() {
 
@@ -18,7 +6,13 @@ const ZBManager = {
 
     const chat = document.getElementById("chat");
 
-    if (!input || !chat) return;
+    if (!input || !chat) {
+
+      alert("خطأ: لم أجد خانة السؤال أو صندوق المحادثة");
+
+      return;
+
+    }
 
     const text = input.value.trim();
 
@@ -26,17 +20,43 @@ const ZBManager = {
 
     const userMessage = document.createElement("div");
 
+    userMessage.className = "msg you";
+
     userMessage.innerHTML = "<b>أنت:</b> " + text;
 
     chat.appendChild(userMessage);
 
-    const reply = document.createElement("div");
+    let answer = "أنا جاهز. اسألني عن المبيعات، المخزون، المشتريات أو وضع الشركة.";
 
-    reply.innerHTML =
+    if (text.includes("وضع الشركة")) {
 
-      "<b>ZB AI:</b> تم استلام طلبك: " + text;
+      answer = "وضع الشركة جيد مبدئيًا. سأعرض لك المبيعات والمقبوض والمستحقات والتنبيهات.";
 
-    chat.appendChild(reply);
+    } else if (text.includes("مبيعات")) {
+
+      answer = "مبيعات اليوم: $8,420";
+
+    } else if (text.includes("مقبوض")) {
+
+      answer = "المقبوض اليوم: $6,180";
+
+    } else if (text.includes("مخزون")) {
+
+      answer = "المخزون يحتاج متابعة الأصناف السريعة الحركة والمواد القريبة من النفاد.";
+
+    } else if (text.includes("مشتريات")) {
+
+      answer = "راجع طلبات الشراء المفتوحة والأسعار والموردين قبل اعتماد أي طلب جديد.";
+
+    }
+
+    const managerMessage = document.createElement("div");
+
+    managerMessage.className = "msg";
+
+    managerMessage.innerHTML = "<b>المدير:</b> " + answer;
+
+    chat.appendChild(managerMessage);
 
     input.value = "";
 
@@ -48,13 +68,11 @@ const ZBManager = {
 
     const SpeechRecognition =
 
-      window.SpeechRecognition ||
-
-      window.webkitSpeechRecognition;
+      window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
 
-      alert("التعرف الصوتي غير مدعوم في هذا المتصفح.");
+      alert("التعرف الصوتي غير مدعوم في هذا المتصفح");
 
       return;
 
@@ -64,17 +82,13 @@ const ZBManager = {
 
     recognition.lang = "ar-LB";
 
-    recognition.interimResults = false;
-
     recognition.onresult = function (event) {
 
-      const text = event.results[0][0].transcript;
-
-      const input = document.getElementById("message");
+      const input = document.getElementById("cmd");
 
       if (input) {
 
-        input.value = text;
+        input.value = event.results[0][0].transcript;
 
       }
 
@@ -86,13 +100,13 @@ const ZBManager = {
 
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  ZBManager.init();
-
-});
-
 window.sendMessage = function () {
+
+  ZBManager.sendMessage();
+
+};
+
+window.ask = function () {
 
   ZBManager.sendMessage();
 
@@ -101,10 +115,5 @@ window.sendMessage = function () {
 window.startVoice = function () {
 
   ZBManager.startVoice();
-
-};
-window.ask = function () {
-
-  ZBManager.sendMessage();
 
 };
