@@ -14,7 +14,7 @@ const ZBManager = {
 
   sendMessage() {
 
-    const input = document.getElementById("message");
+    const input = document.getElementById("cmd");
 
     const chat = document.getElementById("chat");
 
