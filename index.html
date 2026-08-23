@@ -25,7 +25,15 @@ footer{text-align:center;color:#7b857e;padding:25px}
 <div class="container">
 <section class="hero">
 <h1>صباح الخير، سامي 👋</h1><p>هذه نسخة أولية من غرفة قيادة زهرة بلدي.</p>
-<button onclick="sendMessage()">اسأل المدير</button>
+<div class="ai">
+
+  <input id="cmd" type="text" placeholder="اكتب سؤالك للمدير هنا">
+
+  <button type="button" onclick="sendMessage()">اسأل المدير</button>
+
+</div>
+
+<div id="chat" class="chat"></div>
 </section>
 <div class="grid">
 <div class="card"><div class="label">مبيعات اليوم</div><div class="value green">$8,420</div></div>
