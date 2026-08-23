@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZB AI Manager</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#f4f6f3;color:#1f2a24}
+header{background:#173f2b;color:white;padding:22px 6%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:25px;font-weight:800}.sub{opacity:.75;font-size:13px;margin-top:4px}
+.container{max-width:1200px;margin:28px auto;padding:0 18px}
+.hero{background:white;border-radius:20px;padding:24px;box-shadow:0 5px 20px #00000010;margin-bottom:20px}
+.hero h1{margin:0 0 7px}.hero p{margin:0;color:#647067}
+.ai{display:flex;gap:10px;margin-top:20px}.ai input{flex:1;padding:15px;border:1px solid #d8ded9;border-radius:12px;font-size:16px}.ai button{background:#173f2b;color:white;border:0;border-radius:12px;padding:0 22px;font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{background:white;border-radius:16px;padding:19px;box-shadow:0 3px 15px #00000008}.label{color:#748078;font-size:13px}.value{font-size:27px;font-weight:800;margin-top:7px}.green{color:#16804a}.orange{color:#b76b00}.red{color:#b22d2d}
+.sections{display:grid;grid-template-columns:1.2fr .8fr;gap:15px;margin-top:15px}
+h2{font-size:18px;margin-top:0}.list{padding:0;margin:0;list-style:none}.list li{padding:13px 0;border-bottom:1px solid #edf0ed;display:flex;justify-content:space-between;gap:10px}.badge{padding:4px 9px;border-radius:20px;background:#edf6ef;color:#167143;font-size:12px}.warn{background:#fff4df;color:#9a6100}.danger{background:#fdeaea;color:#a62b2b}
+.chat{min-height:260px;background:#102b1f;color:white;border-radius:16px;padding:18px}.msg{background:#1c4533;padding:12px;border-radius:12px;margin:9px 0;line-height:1.7}.you{background:#315d49}
+footer{text-align:center;color:#7b857e;padding:25px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.sections{grid-template-columns:1fr}.ai{flex-direction:column}.ai button{height:48px}}
+</style>
+</head>
+<body>
+<header><div><div class="logo">🌿 ZB AI Manager</div><div class="sub">Zahrit Balady — نظام التشغيل الذكي</div></div><div>لوحة المدير</div></header>
+<div class="container">
+<section class="hero">
+<h1>صباح الخير، سامي 👋</h1><p>هذه نسخة أولية من غرفة قيادة زهرة بلدي.</p>
+<div class="ai"><input id="cmd" placeholder="مثال: اعطيني وضع الشركة اليوم"><button onclick="ask()">اسأل المدير</button></div>
+</section>
+<div class="grid">
+<div class="card"><div class="label">مبيعات اليوم</div><div class="value green">$8,420</div></div>
+<div class="card"><div class="label">المقبوض اليوم</div><div class="value">$6,180</div></div>
+<div class="card"><div class="label">المستحقات</div><div class="value orange">$12,760</div></div>
+<div class="card"><div class="label">تنبيهات مهمة</div><div class="value red">5</div></div>
+</div>
+<div class="sections">
+<div class="card">
+<h2>📦 المخزون والإنتاج</h2>
+<ul class="list">
+<li><span>الخيار المخلل</span><span class="badge warn">يكفي 6 أيام</span></li>
+<li><span>المكدوس</span><span class="badge">مخزون جيد</span></li>
+<li><span>المرطبانات</span><span class="badge danger">شراء مطلوب</span></li>
+<li><span>طلبات قيد التجهيز</span><b>14</b></li>
+</ul>
+</div>
+<div class="card">
+<h2>⚠️ يحتاج قرارك</h2>
+<ul class="list">
+<li><span>3 عملاء متأخرون &gt; 30 يوم</span></li>
+<li><span>شراء مواد خام</span></li>
+<li><span>مراجعة سعر منتج</span></li>
+<li><span>طلب إنتاج كبير</span></li>
+</ul>
+</div>
+</div>
+<div class="sections">
+<div class="chat" id="chat"><h2>🤖 مدير زهرة بلدي</h2><div class="msg">أنا جاهز. اسألني عن المبيعات، المخزون، الإنتاج، الحسابات أو العملاء.</div></div>
+<div class="card">
+<h2>📊 مؤشرات سريعة</h2>
+<ul class="list">
+<li><span>أفضل منتج</span><b>مكدوس</b></li>
+<li><span>أعلى عميل</span><b>مطعم X</b></li>
+<li><span>طلبات اليوم</span><b>27</b></li>
+<li><span>توقع مبيعات الأسبوع</span><b>$51,300</b></li>
+</ul>
+</div>
+</div>
+</div>
+<footer>Prototype v1 — ZB AI Manager</footer>
+<script>
+function ask(){
+ const i=document.getElementById('cmd'), c=document.getElementById('chat');
+ const q=i.value.trim(); if(!q)return;
+ c.innerHTML += '<div class="msg you">'+q+'</div>';
+ let a='حالياً هذه نسخة تجريبية للواجهة. في النسخة التشغيلية سأربط هذا الأمر ببيانات الشركة ليعطيك نتيجة فعلية.';
+ if(q.includes('وضع الشركة')||q.includes('اليوم')) a='ملخص اليوم: المبيعات $8,420، المقبوض $6,180، المستحقات $12,760. يوجد 5 تنبيهات، وأهمها شراء المرطبانات ومتابعة العملاء المتأخرين.';
+ else if(q.includes('مخزون')) a='المخزون: الخيار يكفي تقريباً 6 أيام، المكدوس جيد، والمرطبانات تحتاج شراء.';
+ else if(q.includes('مبيعات')) a='مبيعات اليوم التجريبية $8,420، وعدد الطلبات 27.';
+ c.innerHTML += '<div class="msg">'+a+'</div>'; i.value='';
+}
+</script>
+</body></html>
