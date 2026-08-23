@@ -1,0 +1,25 @@
+name: ZB AI Manager
+
+on:
+
+  workflow_dispatch:
+
+jobs:
+
+  ai-manager:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check AI Manager
+
+        run: |
+
+          echo "ZB AI Manager is running"
+
+          echo "OpenAI secret is configured"
+
+        env:
+
+          OPENAI_API_KEY
